@@ -1,0 +1,35 @@
+// base rule in eslint-config-airbnb-base/rules floder
+//no-useless-escape in best-practices.js disable
+//es6 rules in index.js disable
+// no-underscore-dangle in style.js disable
+//func-names in style.js disable
+// comma-spacing in style.js disable
+
+/*
+1、函数var定义的变量要统一放在函数开头；
+2、字符串全部单引号；
+3、禁止圆括号内的空格；
+4、每个作用域要求只有一个变量声明，合并变量申明；
+5、禁止对象的花括号中有空格；
+6、要求switch语句中有default分支，或使用// no default来表明此处不需要default分支
+7、要求中缀操作符周围有空格；
+8、判断要用===替代==；
+9、縮進四個空格；
+*/
+
+{
+  "extends": "airbnb-base",
+  "env": {
+    "jquery": true
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "varsIgnorePattern": "util" }],
+    "max-len": ["error", 999, 4],
+    "one-var": ["error", "always"],
+    "quote-props": [2, "as-needed", { "keywords": true, "unnecessary": false, "numbers": false }],
+    "newline-per-chained-call": ["error", {"ignoreChainWithDepth": 6}],
+    "new-cap": ["error", {"capIsNew": false}],
+    "object-curly-spacing": ["error", "never"],
+	"indent": ["error", 4, {"SwitchCase": 1}]
+  }
+}
