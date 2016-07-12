@@ -20,6 +20,7 @@ var pngquant = require('imagemin-pngquant');//png 压缩
 var sourceMaps = require('gulp-sourcemaps');//sourcemaps
 var concat = require('gulp-concat'); // 文件合併
 var browserSync = require('browser-sync').create();
+var stripDebug = require('gulp-strip-debug'); // Strip console, alert, and debugger
 // scss lint
 var postcss = require('gulp-postcss');
 var reporter = require('postcss-reporter');
@@ -82,12 +83,12 @@ gulp.task('sass-to-css', ['scss-lint'], function(){
         cascade: false
       }))
       .pipe(sourceMaps.write('../../dist/css/maps'))
-      .pipe(gulp.dest());
+      .pipe(gulp.dest(buildCssSrc));
 });
 
 //css minify
 gulp.task('minify-css', function() {
-  return gulp.src(buildCss)
+  return gulp.src(['vendor/gentallela/custom.css', buildCss])
       .pipe(changed(buildCss))
       // .pipe(assetRev())
       .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -98,6 +99,7 @@ gulp.task('minify-css', function() {
 gulp.task('eslint', function () {
   return gulp.src(buildJs)
       .pipe(changed(buildJs))
+      .pipe(stripDebug())
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());
@@ -106,6 +108,7 @@ gulp.task('eslint', function () {
 gulp.task('jscompress',['eslint'], function (cb) {
   pump([
         gulp.src(buildJs),
+        stripDebug(),
         uglify(),
         gulp.dest(distJsSrc)
       ],
