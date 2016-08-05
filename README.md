@@ -1,6 +1,6 @@
 # 一套基于gulp+nodejs的前端自动化工具
 
-解决雪碧图的生成，sass验证，js验证，sass to css，css、js压缩，图片压缩，游览器自动刷新
+解决雪碧图的生成，sass验证，sass to css，css、js压缩，js验证，js去除console、alert、and debugger，图片压缩，游览器自动刷新
 
 ## 目录结构
 ```
