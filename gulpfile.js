@@ -46,7 +46,8 @@ gulp.task('css-sprite', function(){
         cssName: 'icon.css',
         imgPath:'../images/sprite.png'
       }))
-      .pipe(gulpif('*.png', gulp.dest(buildImgSrc), gulp.dest(buildSassSrc)));
+      .pipe(gulpif('*.png', gulp.dest(buildImgSrc), gulp.dest(buildSassSrc)))
+      .pipe(browserSync.reload({stream: true}));
 });
 //imagemin
 gulp.task('imagemin',['css-sprite'], function(){
@@ -57,7 +58,8 @@ gulp.task('imagemin',['css-sprite'], function(){
         interlaced: true,
         use: [pngquant()]
       }))
-      .pipe(gulp.dest(distImgSrc));
+      .pipe(gulp.dest(distImgSrc))
+      .pipe(browserSync.reload({stream: true}));
 });
 //sass lint
 gulp.task("scss-lint", function() {
@@ -68,7 +70,8 @@ gulp.task("scss-lint", function() {
     })
   ];
   return gulp.src(buildSass)
-      .pipe(postcss(processors, {syntax: syntax_scss}));
+      .pipe(postcss(processors, {syntax: syntax_scss}))
+      .pipe(browserSync.reload({stream: true}));
 });
 //sass to css
 gulp.task('sass-to-css', ['scss-lint'], function(){
@@ -83,12 +86,13 @@ gulp.task('sass-to-css', ['scss-lint'], function(){
         cascade: false
       }))
       .pipe(sourceMaps.write('../../dist/css/maps'))
-      .pipe(gulp.dest(buildCssSrc));
+      .pipe(gulp.dest(buildCssSrc))
+      .pipe(browserSync.reload({stream: true}));
 });
 
 //css minify
 gulp.task('minify-css', function() {
-  return gulp.src(['vendor/gentallela/custom.css', buildCss])
+  return gulp.src(buildCss)
       .pipe(changed(buildCss))
       // .pipe(assetRev())
       .pipe(cleanCSS({compatibility: 'ie8'}))
@@ -107,13 +111,14 @@ gulp.task('eslint', function () {
 // js minify
 gulp.task('jscompress',['eslint'], function (cb) {
   pump([
-        gulp.src(buildJs),
-        stripDebug(),
-        uglify(),
-        gulp.dest(distJsSrc)
-      ],
-      cb
-  );
+    gulp.src(buildJs),
+    stripDebug(),
+    uglify(),
+    gulp.dest(distJsSrc),
+    browserSync.reload({stream: true})
+  ],
+  cb
+  )
 });
 
 // watch icon
