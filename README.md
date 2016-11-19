@@ -1,4 +1,4 @@
-# 一套基于gulp+nodejs的前端自动化工具
+# 一套基于gulp+nodejs的前端自动化工具 [![Build Status](https://travis-ci.org/dsky1990/gulp-task.svg?branch=master)](https://travis-ci.org/dsky1990/gulp-task)
 
 解决雪碧图的生成，sass验证，sass to css，css、js压缩，js验证，js去除console、alert、and debugger，图片压缩，游览器自动刷新
 
