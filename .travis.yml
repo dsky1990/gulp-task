@@ -4,4 +4,3 @@ node_js:
 before_script:
   - npm install -g gulp
 script: gulp
-install: travis_wait 30 nvm install
