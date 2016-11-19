@@ -44,7 +44,7 @@ gulp.task('css-sprite', function(){
       .pipe(spritesmith({
         imgName: 'sprite.png',
         cssName: 'icon.css',
-        imgPath:'../images/sprite.png'
+        imgPath: '../images/sprite.png'
       }))
       .pipe(gulpif('*.png', gulp.dest(buildImgSrc), gulp.dest(buildSassSrc)))
       .pipe(browserSync.reload({stream: true}));
@@ -146,6 +146,8 @@ gulp.task('watch-js', function (done) {
   gulp.watch(buildJs, ['jscompress'])
       .on('end', done);
 });
+// release
+gulp.task('release', ['css-sprite','imagemin', 'sass-to-css', 'minify-css','jscompress']);
 //前端开发版
 gulp.task('watch', ['watch-icon', 'watch-img', 'watch-sass', 'watch-css', 'watch-js']);
 // browser-sync
