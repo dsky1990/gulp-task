@@ -36,7 +36,7 @@
     "postcss-scss": "^0.1.8"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp default"
   },
   "keywords": [
     "dsky",
