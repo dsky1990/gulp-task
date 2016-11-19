@@ -36,7 +36,7 @@
     "postcss-scss": "^0.1.8"
   },
   "scripts": {
-    "test": "gulp watch"
+    "test": "gulp release"
   },
   "keywords": [
     "dsky",
